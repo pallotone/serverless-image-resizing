@@ -1,15 +1,9 @@
 'use strict';
 let Base62 = require('base62'),
     unirest = require('unirest');
-let BUCKET = process.env.BUCKET;
-let URL = process.env.URL;
 
 exports.handler = function (event, context) {
-    let path = event.path;
-    console.log(path);
-    let match = path.match(/t\/(.*)/);
-
-    let track62 = match[1];
+    let track62 = event.trackId;
     let trackId = Base62.decode(track62);
     let trackUrl = 'https://prod.api.pallotone.com/api/v1/tracks/' + trackId + '.json';
     unirest.get(trackUrl)
@@ -25,7 +19,7 @@ exports.handler = function (event, context) {
                 let trackJson = response.body;
                 let title = trackJson.name;
                 let description = 'Listen to this Pallotone recording by ' + trackJson.author.name;
-                let cover = trackJson.author.cover_url ? trackJson.author.cover_url + '/OG' : 'https://s3.amazonaws.com/pallotone/ptone_cover.png';
+                let cover = trackJson.author.cover_url ? trackJson.author.cover_url + '/opengraph' : 'https://s3.amazonaws.com/pallotone/ptone_cover.png';
                 let url = 'https://pto.ne/t/' + track62;
                 let opengraphHtml = `<!doctype html>
                                 <html lang="en">
@@ -59,7 +53,7 @@ exports.handler = function (event, context) {
                                       <img src="${cover}"/>
                                     </body>
                                 </html>`;
-                context.succeed(opengraphHtml);
+                context.succeed({opengraphHtml: opengraphHtml});
             }
         });
 };
