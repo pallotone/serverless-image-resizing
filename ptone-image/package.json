@@ -1,6 +1,6 @@
 {
   "name": "ptone-image",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Serverless image resizing",
   "readme": "Serverless image resizing",
   "repository": "https://github.com/awslabs/serverless-image-resizing",
