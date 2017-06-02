@@ -16,9 +16,9 @@ exports.handler = function (event, context) {
     console.time('time');
     let key = event.queryStringParameters.key;
     console.log(key);
-    let match = key.match(/(avatar|cover)\/(.*)\/(\d+)x(\d+)/);
+    let match = key.match(/(avatar|cover|artwork)\/(.*)\/(\d+)x(\d+)/);
     if (!match) {
-        match = key.match(/(avatar|cover)\/(.*)\/(opengraph)/);
+        match = key.match(/(avatar|cover|artwork)\/(.*)\/(opengraph)/);
     }
     if (!match) {
         let error = {
@@ -100,7 +100,7 @@ exports.handler = function (event, context) {
                         Key: key
                     }).promise()
                         .then(() => {
-                            request.post(`https://graph.facebook.com/v2.8/?scrape=true&id=https://pallotone.com/t/${}`);
+                            //request.post(`https://graph.facebook.com/v2.8/?scrape=true&id=https://pallotone.com/t/${}`);
                             console.timeEnd('time');
                             context.succeed({
                                 statusCode: '303',
