@@ -24,7 +24,7 @@
     "stage": "prod"
   },
   "queryStringParameters": {
-    "key": "cover/e08d3e83cdb963e893a58980260642f3/opengraph"
+    "key": "avatar/29ca282a720d1a18c453f37fc1e189e5/400x400"
   },
   "headers": {
     "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
